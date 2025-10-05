@@ -1,0 +1,23 @@
+name: Cache Example with Prime
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache dependencies
+        id: cache-step
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: cache-be2d1c8
+
+      - name: prime-cache-be2d1c8
+        run: |
+          echo "Cache hit: ${{ steps.cache-step.outputs.cache-hit }}"
